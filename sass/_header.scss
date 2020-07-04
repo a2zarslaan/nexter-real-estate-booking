@@ -1,0 +1,6 @@
+.header {
+  background-color: $color-grey-dark-1;
+
+  //the header expands from starting of grid lines (named) to the end of line number 6 (unnamed). Hence we're using it the way it's shown below
+  grid-column: full-start / col-end 6;
+}
