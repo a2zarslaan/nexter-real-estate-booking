@@ -1,5 +1,42 @@
 .features {
-  background-color: $color-grey-light-2;
   grid-column: center-start / center-end;
-  
+
+  margin: 15rem 0;
+
+  display: grid;
+  //grid-template-columns: repeat(3, 1fr);
+
+  //adding responsive behavior without media queries
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 6rem;
+
+  //there is gap between the h4 and the p here because by default align items is set to stretch in grids, hence rows are irregular size here. The solution is to change align-items setting
+  align-items: start;
+}
+
+
+//this is the feature component, not to be confused with the features class
+.feature{
+
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2.5rem;
+
+  &__icon {
+    fill: $color-primary;
+    width: 4.5rem;
+    height: 4.5rem;
+
+    //row should go upto the end. -1 for the grid end won't work here because it works only for explicit grids and here the grid is implicit, hence we'll have to use span
+    grid-row: 1 / span 2;
+
+
+    //just adjusting the icon position wrt to the text manually
+    transform: translateY(-1rem);
+  }
+
+  &__text {
+    font-size: 1.7rem;
+  }
 }
