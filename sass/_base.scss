@@ -16,6 +16,13 @@ $font-display: 'Josefin Sans', sans-serif;
 
 
 
+//RESPONSIVE BREAKPOINTS
+$bp-largest: 75em;   //We are using em here for reasons explained in previous lectures. 75em = 1200/16px
+$bp-large: 62.5em; //1000/16px = 62.5em
+$bp-medium: 50em; //800/16px = 50em
+$bp-small: 37.5em; //600/16px = 37.5 em
+
+
 //global reset
 *,
 *::before,
@@ -28,6 +35,11 @@ $font-display: 'Josefin Sans', sans-serif;
 html {
   box-sizing: border-box;
   font-size: 62.5%;  //1rem = 10px, 10px/16px = 62.5%
+
+  //responsive setting, max-width because this is a desktop first design
+  @media only screen and (max-width: $bp-largest){
+    font-size: 50%;  //1rem = 8px, 8/16px = 50%
+  }
 }
 
 body {
@@ -48,6 +60,18 @@ body {
   //we want the width of these columns to be at least as wide as the min content, and maximum 14rem wide. This will ensure respinsive behavior as screen size is reduced. Sidebar is 8rem fixed because it always stays at the same spot. We're using fractional units to the left and right of the 8 columns in the middle to ensure that they are in the middle of the screen. Further, minmax(6rem, 1fr) is used to provide a minimum width of 60 pixels to the column. This is because these fractional units here are working as a margin between the content and the end of the page, so even when as screen size is reduced they do not disappear.
   grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem)[col-end]) [center-end] minmax(6rem, 1fr) [full-end]; //1140/8 = 140px
 
+  @media only screen and (max-width: $bp-large){
+    //we'll add a new row and remove the first column
+    grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+    grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem)[col-end]) [center-end] minmax(6rem, 1fr) [full-end]; 
+  }  
+  
+  
+  @media only screen and (max-width: $bp-medium){
+    //we'll add a new row here too. So the first row will be the sidebar, second will be the the header, after that will be a new row for realtors, everything after will remain the same. Header is 94vh because we want it to cover the whole full screen in this screen size, and there is a 6rem high sidebar as well, so the total needs to be 100vh-6rem. These cannot be directly subtracted, so we'll use the calc function
+    //grid-template-rows: 6rem calc(100vh - 6rem) min-content min-content 40vh repeat(3, min-content);
 
- 
+    //later we reduced the line above, as the automatic palcement algorithm will take care of rest of the elements according to their size.
+    grid-template-rows: 6rem calc(100vh - 6rem);
+  }
 }

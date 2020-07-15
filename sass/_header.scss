@@ -3,4 +3,83 @@
 
   //the header expands from starting of grid lines (named) to the end of line number 6 (unnamed). Hence we're using it the way it's shown below
   grid-column: full-start / col-end 6;
+  background-image: linear-gradient(rgba($color-secondary, .93), rgba($color-secondary, .93)), url(../img/hero.jpeg);
+  background-size: cover;
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+
+  display: grid;
+
+  //to give max height to the first grid item as it is covering all the empty space, so we give it 1fr height. We use minmax to set up the responsive behaviour of the main heading h1 in the header
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+
+  //make grid as wide as the widest element
+  //now we added responsive behaviour as well, which will ensure that the grid doesn't get smaller than the minimum content width
+  grid-template-columns: minmax(min-content, max-content);
+  grid-row-gap: 1.5rem;
+
+  //center the contents of the grid item in the header
+  justify-content: center;
+
+
+//making the header section take the full screen on bp medium
+  @media only screen and (max-width: $bp-medium){
+    grid-column: 1 / -1;
+  }
+
+  @media only screen and (max-width: $bp-small){
+    padding: 5rem;
+  }
+
+
+  &__logo{
+    height: 3rem;
+    justify-self: center;
+  }
+
+  &__btn{
+    //to make the button smaller in size and position it only at the left side
+    align-self: start;
+    justify-self: start;
+
+  }
+
+  &__seenon-text {
+    display: grid;
+
+    //line--as seen on--line
+    grid-template-columns: 1fr max-content 1fr;
+    grid-column-gap: 1.5rem;
+    align-items: center ;
+
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
+
+
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      display: block;
+      background-color: currentColor;
+    }
+  }
+
+
+  &__seenon-logos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3rem;
+    justify-items: center;
+    align-items: center;
+    img{
+
+      //max height and max width are for responsive behavior
+      max-height: 2.5rem;
+      max-width: 100%;
+      filter: brightness(70%);
+    }
+  }
+
 }
